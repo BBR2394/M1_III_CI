@@ -54,7 +54,7 @@ jobs:
   set_postgre:
     docker:
       - image: circleci/node:dubnium
-      - image: circle/postgres:9.6
+      - image: circle/postgres
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle-test_test
