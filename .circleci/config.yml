@@ -9,8 +9,8 @@ jobs:
         - checkout
         - restore_cache:
             keys: 
-                - {{ .Environement.$CACHE_VERSION }}-dependencies-{{ checksum "package.json" }}
-                - {{ .Environement.$CACHE_VERSION }}-dependencies-
+                - {{ .Environment.CACHE_VERSION }}-dependencies-{{ checksum "package.json" }}
+                - {{ .Environment.CACHE_VERSION }}-dependencies-
         - run:
             command: yarn global add node-gyp && yarn install
             name: yarnCmdTP
@@ -20,7 +20,7 @@ jobs:
         - save_cache:
             paths:
                 - node_modules
-            key: {{ .Environement.$CACHE_VERSION }}-dependencies-{{ checksum "package.json" }}
+            key: {{ .Environment.CACHE_VERSION }}-dependencies-{{ checksum "package.json" }}
 
 workflows:
   welcome:
