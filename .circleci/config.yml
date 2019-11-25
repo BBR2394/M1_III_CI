@@ -1,4 +1,3 @@
-version: 2
 jobs:
   install:
     docker:
@@ -50,6 +49,7 @@ jobs:
               name: yarn_test_ci
               command: yarn test:ci
 workflows:
+  version: 2
   install_n_build_n_test:
     jobs:
       - install
