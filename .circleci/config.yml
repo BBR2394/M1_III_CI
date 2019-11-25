@@ -14,9 +14,9 @@ jobs:
             command: echo $CACHE_VERSION
             name: cacheVer
         - save_cache:
-          key: mycache-{{ checksum "package.json" }}
-          paths:
-            - cache/bundle
+            key: mycache-{{ checksum "package.json" }}
+            paths:
+                - cache/bundle
 workflows:
   welcome:
     jobs:
