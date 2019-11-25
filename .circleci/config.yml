@@ -4,19 +4,22 @@ jobs:
   mybuild:
     docker:
     - image: circleci/node:dubnium
+    working_directory: ~/repo
     steps:
+        - restore_cache:
+            keys: 
+                - mycache-{{ checksum "package.json" }}
+                - mycache-
         - run:
             command: yarn global add node-gyp && yarn install
             name: yarnCmdTP
-        - restore_cache:
-            keys: mycache-{{ checksum "package.json" }}
         - run:
             command: echo $CACHE_VERSION
             name: cacheVer
         - save_cache:
             key: mycache-{{ checksum "package.json" }}
             paths:
-                - ./
+                - node_modules
 workflows:
   welcome:
     jobs:
