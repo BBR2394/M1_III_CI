@@ -9,7 +9,7 @@ jobs:
             command: yarn global add node-gyp && yarn install
             name: yarnCmdTP
         - restore_cache:
-          keys: mycache-{{ checksum "package.json" }}
+            keys: mycache-{{ checksum "package.json" }}
         - run:
             command: echo $CACHE_VERSION
             name: cacheVer
