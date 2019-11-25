@@ -21,7 +21,7 @@ jobs:
                 paths:
                     - node_modules
                 key: dependencies-{{ .Environment.CACHE_VERSION }}-dependencies-{{ checksum "package.json" }}
-                
+
     lint:
         docker:
             - image: circleci/node:dubnium
@@ -31,6 +31,9 @@ jobs:
                 keys: 
                     - dependencies-{{ .Environment.CACHE_VERSION }}-{{ checksum "package.json" }}
                     - dependencies-{{ .Environment.CACHE_VERSION }}-
+            - run:
+                command: yarn global add node-gyp && yarn install
+                name: yarnCmdTP
             - run:
                 name: yarn_extra_one
                 command: yarn lint
