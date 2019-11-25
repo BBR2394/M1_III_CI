@@ -2,29 +2,28 @@
 version: 2
 jobs:
     install:
-    docker:
-    - image: circleci/node:dubnium
-    working_directory: ~/repo
-    steps:
-        - checkout
-        - restore_cache:
-            keys: 
-                - dependencies-{{ .Environment.CACHE_VERSION }}-{{ checksum "package.json" }}
-                - dependencies-{{ .Environment.CACHE_VERSION }}-
-        - run:
-            command: yarn global add node-gyp && yarn install
-            name: yarnCmdTP
-        - run:
-            command: echo $CACHE_VERSION
-            name: cacheVer
-        - save_cache:
-            paths:
-                - node_modules
-            key: dependencies-{{ .Environment.CACHE_VERSION }}-dependencies-{{ checksum "package.json" }}
-        - run:
-            name: yarn_extra_one
-            command: yarn lint && yarn format:check
-
+        docker:
+            - image: circleci/node:dubnium
+        working_directory: ~/repo
+        steps:
+            - checkout
+            - restore_cache:
+                keys: 
+                    - dependencies-{{ .Environment.CACHE_VERSION }}-{{ checksum "package.json" }}
+                    - dependencies-{{ .Environment.CACHE_VERSION }}-
+            - run:
+                command: yarn global add node-gyp && yarn install
+                name: yarnCmdTP
+            - run:
+                command: echo $CACHE_VERSION
+                name: cacheVer
+            - save_cache:
+                paths:
+                    - node_modules
+                key: dependencies-{{ .Environment.CACHE_VERSION }}-dependencies-{{ checksum "package.json" }}
+            - run:
+                name: yarn_extra_one
+                command: yarn lint && yarn format:check
     lint:
         steps:
             - run:
