@@ -21,9 +21,7 @@ jobs:
                 paths:
                     - node_modules
                 key: dependencies-{{ .Environment.CACHE_VERSION }}-dependencies-{{ checksum "package.json" }}
-            - run:
-                name: yarn_extra_one
-                command: yarn lint && yarn format:check
+                
     lint:
         docker:
             - image: circleci/node:dubnium
