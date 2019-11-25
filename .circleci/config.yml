@@ -53,7 +53,8 @@ jobs:
           command: yarn test:ci
   set_postgre:
     docker:
-      - image: postgres:9.6
+      - image: circleci/node:dubnium
+      - image: circle/postgres:9.6
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle-test_test
