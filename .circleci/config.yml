@@ -53,7 +53,7 @@ jobs:
           command: yarn test:ci
   set_postgre:
     docker:
-      - image: postgres:9.6-jessie
+      - image: postgres:9.6
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle-test_test
