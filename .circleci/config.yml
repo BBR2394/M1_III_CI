@@ -26,14 +26,16 @@ jobs:
                 command: yarn lint && yarn format:check
     lint:
         steps:
+            - checkout
             - run:
                 name: yarn_extra_one
                 command: yarn lint && yarn format:check
-    unit_test:
-        steps:
-            - run : 
-                name: yarn_extra_two
-                command: yarn test:ci
+    # unit_test:
+    #     steps:
+    #         - checkout
+    #         - run : 
+    #             name: yarn_extra_two
+    #             command: yarn test:ci
 
 workflows:
   version: 2
@@ -43,7 +45,7 @@ workflows:
         - lint : 
             requires:
                 - install
-        - unit_test :
-            requires : 
-                - install
-                - lint
+        # - unit_test :
+        #     requires : 
+        #         - install
+        #         - lint
