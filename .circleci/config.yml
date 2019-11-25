@@ -16,7 +16,7 @@ jobs:
         - save_cache:
             key: mycache-{{ checksum "package.json" }}
             paths:
-                - cache/bundle
+                - ./
 workflows:
   welcome:
     jobs:
