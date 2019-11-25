@@ -8,6 +8,9 @@ jobs:
     - run:
         command: yarn global add node-gyp && yarn install
         name: yarnCmdTP
+    - run:
+        command: echo $CACHE_VERSION
+        name: cacheVer
 workflows:
   welcome:
     jobs:
