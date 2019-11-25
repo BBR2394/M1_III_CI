@@ -25,6 +25,8 @@ jobs:
                 name: yarn_extra_one
                 command: yarn lint && yarn format:check
     lint:
+        docker:
+            - image: circleci/node:dubnium
         steps:
             - checkout
             - run:
