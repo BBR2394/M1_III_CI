@@ -63,6 +63,9 @@ jobs:
     steps:
       - checkout
       - run:
+          command: yarn global add node-gyp && yarn install
+          name: yarnCmdTP
+      - run:
           command: yarn test:e2e
           name: cmd_test_postgre
 workflows:
