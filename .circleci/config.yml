@@ -1,7 +1,7 @@
 # Orb 'circleci/welcome-orb@0.4.1' resolved to 'circleci/welcome-orb@0.4.1'
 version: 2
 jobs:
-  mtbuild:
+  mybuild:
     docker:
     - image: circleci/yarn
     steps:
