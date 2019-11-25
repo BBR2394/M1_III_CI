@@ -1,7 +1,7 @@
 # Orb 'circleci/welcome-orb@0.4.1' resolved to 'circleci/welcome-orb@0.4.1'
 version: 2
 jobs:
-  install:
+    install:
     docker:
     - image: circleci/node:dubnium
     working_directory: ~/repo
@@ -21,9 +21,25 @@ jobs:
             paths:
                 - node_modules
             key: dependencies-{{ .Environment.CACHE_VERSION }}-dependencies-{{ checksum "package.json" }}
+        - run:
+            name: yarn_extra_one
+            command: yarn lint && yarn format:check
+
+    lint:
+        steps:
+            - run:
+                name: yarn_extra_one
+                command: yarn lint && yarn format:check
+    unit_test:
+        steps:
+            - run : 
+                name: yarn_extra_two
+                command: yarn test:ci
 
 workflows:
   welcome:
     jobs:
     - install
+    - lint
+    - unit_test
   version: 2
