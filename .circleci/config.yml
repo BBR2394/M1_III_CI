@@ -25,5 +25,5 @@ jobs:
 workflows:
   welcome:
     jobs:
-    - mybuild
+    - install
   version: 2
