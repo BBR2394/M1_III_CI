@@ -17,9 +17,10 @@ jobs:
             command: echo $CACHE_VERSION
             name: cacheVer
         - save_cache:
-            key: $CACHE_VERSION-dependencies-{{ checksum "package.json" }}
             paths:
                 - node_modules
+            key: $CACHE_VERSION-dependencies-{{ checksum "package.json" }}
+            
 workflows:
   welcome:
     jobs:
