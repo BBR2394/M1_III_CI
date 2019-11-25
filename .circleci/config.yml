@@ -29,6 +29,10 @@ jobs:
             - image: circleci/node:dubnium
         steps:
             - checkout
+            - restore_cache:
+                keys: 
+                    - dependencies-{{ .Environment.CACHE_VERSION }}-{{ checksum "package.json" }}
+                    - dependencies-{{ .Environment.CACHE_VERSION }}-
             - run:
                 name: yarn_extra_one
                 command: yarn lint && yarn format:check
