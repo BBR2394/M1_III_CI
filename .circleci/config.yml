@@ -35,7 +35,10 @@ jobs:
                     - dependencies-{{ .Environment.CACHE_VERSION }}-
             - run:
                 name: yarn_extra_one
-                command: yarn lint && yarn format:check
+                command: yarn lint
+            - run:
+                name: yarn_extra_two
+                command: yarn format:check
     # unit_test:
     #     steps:
     #         - checkout
