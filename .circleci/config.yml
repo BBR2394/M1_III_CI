@@ -1,7 +1,7 @@
 # Orb 'circleci/welcome-orb@0.4.1' resolved to 'circleci/welcome-orb@0.4.1'
 version: 2
 jobs:
-  mybuild:
+  install:
     docker:
     - image: circleci/node:dubnium
     working_directory: ~/repo
@@ -9,8 +9,8 @@ jobs:
         - checkout
         - restore_cache:
             keys: 
-                - $CACHE_VERSION-dependencies-{{ checksum "package.json" }}
-                - $CACHE_VERSION-dependencies-
+                - {{ .Environement.$CACHE_VERSION }}-dependencies-{{ checksum "package.json" }}
+                - {{ .Environement.$CACHE_VERSION }}-dependencies-
         - run:
             command: yarn global add node-gyp && yarn install
             name: yarnCmdTP
@@ -20,7 +20,7 @@ jobs:
         - save_cache:
             paths:
                 - node_modules
-            key: $CACHE_VERSION-dependencies-{{ checksum "package.json" }}
+            key: {{ .Environement.$CACHE_VERSION }}-dependencies-{{ checksum "package.json" }}
 
 workflows:
   welcome:
