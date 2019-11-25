@@ -54,11 +54,6 @@ jobs:
   set_postgre:
     docker:
       - image: circleci/postgres:latest
-        environment:
-          POSTGRES_USER: root
-          POSTGRES_DB: circle-test_test
-          POSTGRES_PASSWD: toto
-          DATABASE_URL: postgres://{{.Environment.POSTGRES_USER}}:{{.Environment.POSTGRES_PASSWD}}@{{.Environment.API_HOST}}:{{.Environment.API_PORT}}/psdb
     working_directory: ~/repo
     steps:
       - checkout
