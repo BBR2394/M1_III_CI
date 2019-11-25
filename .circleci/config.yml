@@ -9,13 +9,12 @@ jobs:
             command: yarn global add node-gyp && yarn install
             name: yarnCmdTP
         - restore_cache:
-          keys: $CACHE_VERSION-dependencies-{{ checksum "package.json" }}
-          
+          keys: mycache-{{ checksum "package.json" }}
         - run:
             command: echo $CACHE_VERSION
             name: cacheVer
         - save_cache:
-          key: $CACHE_VERSION-dependencies-{{ checksum "package.json" }}
+          key: mycache-{{ checksum "package.json" }}
           paths:
             - cache/bundle
 workflows:
