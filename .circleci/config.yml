@@ -69,7 +69,7 @@ jobs:
           environment:
             POSTGRES_USER: psqluer
             POSTGRES_DB: circle-test_test
-            POSTGRES_PASSWD: h
+            POSTGRES_PASSWD: 
             DATABASE_URL: postgres://{{.Environment.POSTGRES_USER}}:{{.Environment.POSTGRES_PASSWD}}@localhost:5432/psdb
 workflows:
   version: 2
