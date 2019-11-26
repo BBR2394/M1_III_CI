@@ -70,6 +70,14 @@ jobs:
           name: cmd_test_postgre
           command: yarn test:e2e
           environment:
+            POSTGRES_USER: root
+            POSTGRES_DB: circle-test_test
+            JWT_SECRET: "hello world"
+            API_PORT: 3000
+            API_HOST: localhost
+            API_PROTOCOL: http
+            DATABASE_URL: postgres://{{.Environment.POSTGRES_USER}}@{{.Environment.API_HOST}}:{{.Environment.API_PORT}}/{{.Environment.POSTGRES_DB}}
+
 workflows:
   version: 2
   install_n_build_n_test_n_postgre:
