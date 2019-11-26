@@ -73,13 +73,13 @@ jobs:
           name: cmd_test_postgre
           command: yarn test:e2e
           environment:
-            POSTGRES_USER: postgres
+            POSTGRES_USER: toto
             POSTGRES_DB: bdtest
             JWT_SECRET: "hello world"
             API_PORT: 3000
             API_HOST: localhost
             API_PROTOCOL: http
-            DATABASE_URL: "postgres://{{ .Environment.POSTGRES_USER }}@{{ .Environment.API_HOST }}:5432/{{ .Environment.POSTGRES_DB }}"
+            DATABASE_URL: "postgres://testusr@localhost:5432/bdtest"
 workflows:
   version: 2
   install_n_build_n_test_n_postgre:
