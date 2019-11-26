@@ -70,13 +70,6 @@ jobs:
           name: command_apt
           command: sudo apt install -y postgresql-client || true
       - run:
-          name: Database Setup
-          command: |
-            bundle exec rake db:create
-            bundle exec rake db:structure:load
-          environment:
-            DATABASE_URL: "postgres://testusr@localhost:5432/bdtest"
-      - run:
           name: cmd_test_postgre
           command: yarn test:e2e
           environment:
