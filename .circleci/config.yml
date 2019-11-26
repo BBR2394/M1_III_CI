@@ -1,29 +1,93 @@
-version: 2
 jobs:
-  build:
-    working_directory: ~/appName
+  install:
     docker:
-      - image: ruby:2.3.1-jessie
-        environment:
-          PG_HOST: localhost
-          PG_USER: ubuntu
-          RAILS_ENV: test
-          RACK_ENV: test
-      # The following example uses the official postgres 9.6 image, you may also use circleci/postgres:9.6
-      # which includes a few enhancements and modifications. It is possible to use either image.
-      - image: postgres:9.6-jessie
-        environment:
-          POSTGRES_USER: ubuntu
-          POSTGRES_DB: db_name
+      - image: circleci/node:dubnium
+    working_directory: ~/repo
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - dependencies-{{ .Environment.CACHE_VERSION }}-{{ checksum "package.json" }}
+            - dependencies-{{ .Environment.CACHE_VERSION }}-
+            - dependencies-
       - run:
-          name: Install Ruby Dependencies
-          command: bundle install
+          command: yarn global add node-gyp && yarn install
+          name: yarnCmdTP
       - run:
-          name: Set up DB
-          command: |
-            bundle exec rake db:create db:schema:load --trace
-            bundle exec rake db:migrate
+          command: echo $CACHE_VERSION
+          name: cacheVer
+      - save_cache:
+          paths:
+            - node_modules
+          key: dependencies-{{ .Environment.CACHE_VERSION }}-{{ checksum "package.json" }}
+  lint:
+    docker:
+      - image: circleci/node:dubnium
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - dependencies-{{ .Environment.CACHE_VERSION }}-{{ checksum "package.json" }}
+            - dependencies-{{ .Environment.CACHE_VERSION }}-
+            - dependencies-
+      - run:
+          name: yarn_lint
+          command: yarn lint
+      - run:
+          name: yarn_format
+          command: yarn format:check
+  unit_test:
+    docker:
+      - image: circleci/node:dubnium
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - dependencies-{{ .Environment.CACHE_VERSION }}-{{ checksum "package.json" }}
+            - dependencies-{{ .Environment.CACHE_VERSION }}-
+            - dependencies-
+      - run:
+          name: yarn_test_ci
+          command: yarn test:ci
+  set_postgre:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:dubnium
+      - image: circleci/postgres:9.6
         environment:
-          DATABASE_URL: "postgres://ubuntu@localhost:5432/db_name"
+          POSTGRES_USER: toto
+          POSTGRES_DB: bdtest
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - dependencies-{{ .Environment.CACHE_VERSION }}-{{ checksum "package.json" }}
+            - dependencies-{{ .Environment.CACHE_VERSION }}-
+            - dependencies-
+      - run:
+          name: cmd_test_postgre
+          command: yarn test:e2e
+          environment:
+            POSTGRES_USER: toto
+            POSTGRES_DB: bdtest
+            JWT_SECRET: "hello world"
+            API_PORT: 3000
+            API_HOST: localhost
+            API_PROTOCOL: http
+            DATABASE_URL: postgres://toto@localhost:3000/bdtest
+workflows:
+  version: 2
+  install_n_build_n_test_n_postgre:
+    jobs:
+      - install
+      - lint:
+          requires:
+            - install
+      - unit_test:
+          requires:
+            - install
+      - set_postgre:
+          requires:
+            - install
