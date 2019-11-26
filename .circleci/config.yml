@@ -57,7 +57,7 @@ jobs:
       - image: circleci/node:dubnium
       - image: circleci/postgres:9.6
         environment:
-          POSTGRES_USER: testusr
+          POSTGRES_USER: postgres
           POSTGRES_DB: bdtest
     steps:
       - checkout
