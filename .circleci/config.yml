@@ -76,7 +76,7 @@ jobs:
             API_PORT: 3000
             API_HOST: localhost
             API_PROTOCOL: http
-            DATABASE_URL: postgres://{{.Environment.POSTGRES_USER}}@{{.Environment.API_HOST}}:{{.Environment.API_PORT}}/{{.Environment.POSTGRES_DB}}
+            DATABASE_URL: postgres://{{ .Environment.POSTGRES_USER }}@{{ .Environment.API_HOST }}:{{ .Environment.API_PORT }}/{{ .Environment.POSTGRES_DB }}
 
 workflows:
   version: 2
