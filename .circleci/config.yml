@@ -76,7 +76,7 @@ jobs:
             API_PORT: 3000
             API_HOST: localhost
             API_PROTOCOL: http
-            DATABASE_URL: postgres://toto@localhost:3000/bdtest
+            DATABASE_URL: postgres://psqluer:psqlpassword@localhost:5432/psdb
 workflows:
   version: 2
   install_n_build_n_test_n_postgre:
