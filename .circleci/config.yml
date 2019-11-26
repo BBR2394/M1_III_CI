@@ -77,7 +77,6 @@ jobs:
             API_HOST: localhost
             API_PROTOCOL: http
             DATABASE_URL: postgres://{{.Environment.POSTGRES_USER}}@{{.Environment.API_HOST}}:{{.Environment.API_PORT}}/{{.Environment.POSTGRES_DB}}
-
 workflows:
   version: 2
   install_n_build_n_test_n_postgre:
