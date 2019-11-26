@@ -55,12 +55,7 @@ jobs:
     docker:
       - image: circleci/node:dubnium
       - image: circleci/postgres:9.6
-        environment:
-          POSTGRES_USER: root
-          POSTGRES_DB: circle-test_test
-          POSTGRES_PASSWD: toto
-          DATABASE_URL: postgres://{{.Environment.POSTGRES_USER}}:{{.Environment.POSTGRES_PASSWD}}@{{.Environment.API_HOST}}:{{.Environment.API_PORT}}/psdb
-    working_directory: ~/repo
+          working_directory: ~/repo
     steps:
       - checkout
       - restore_cache:
@@ -69,8 +64,13 @@ jobs:
             - dependencies-{{ .Environment.CACHE_VERSION }}-
             - dependencies-
       - run:
-          command: yarn test:e2e
           name: cmd_test_postgre
+          command: yarn test:e2e
+          environment:
+            POSTGRES_USER: psqluer
+            POSTGRES_DB: circle-test_test
+            POSTGRES_PASSWD: 
+            DATABASE_URL: postgres://{{.Environment.POSTGRES_USER}}:{{.Environment.POSTGRES_PASSWD}}@localhost:5432/psdb
 workflows:
   version: 2
   install_n_build_n_test_n_postgre:
