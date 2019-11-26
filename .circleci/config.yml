@@ -57,7 +57,7 @@ jobs:
       - image: circleci/node:dubnium
       - image: circleci/postgres:9.6
         environment:
-          POSTGRES_USER: toto
+          POSTGRES_USER: testusr
           POSTGRES_DB: bdtest
     steps:
       - checkout
@@ -66,6 +66,19 @@ jobs:
             - dependencies-{{ .Environment.CACHE_VERSION }}-{{ checksum "package.json" }}
             - dependencies-{{ .Environment.CACHE_VERSION }}-
             - dependencies-
+      
+      - run: 
+          name: command_apt
+          command: sudo apt install -y postgresql-client || true
+
+      - run:
+          name: Database Setup
+          command: |
+            bundle exec rake db:create
+            bundle exec rake db:structure:load
+        environment:
+          DATABASE_URL: "postgres://testusr@localhost:5432/bdtest"
+
       - run:
           name: cmd_test_postgre
           command: yarn test:e2e
