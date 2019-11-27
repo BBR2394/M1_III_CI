@@ -78,11 +78,11 @@ jobs:
           environment:
             POSTGRES_USER: postgres
             POSTGRES_DB: bdtest
-            JWT_SECRET: 'hello world'
+            JWT_SECRET: "hello world"
             API_PORT: 3000
             API_HOST: localhost
             API_PROTOCOL: http
-            DATABASE_URL: 'postgres://postgres@localhost:5432/bdtest'
+            DATABASE_URL: "postgres://postgres@localhost:5432/bdtest"
   set_docker:
     docker:
       - image: bertral/cours_dev_ops_miii:latest
@@ -92,9 +92,9 @@ jobs:
     steps:
       - checkout
       - run:
-          name: 'do nothing just echo toto'
-          command: echo toto && ls 
-      - run: 
+          name: "do nothing just echo toto"
+          command: echo toto && ls
+      - run:
           name: "get env"
           command: env
   set_documentation:
@@ -138,7 +138,7 @@ workflows:
       - set_documentation:
           requires:
             - install
-version: '2'
+version: "2"
 services:
   ognion-boilerplate-postgresql:
     image: postgres:9.6.5
@@ -147,3 +147,4 @@ services:
       - POSTGRES_PASSWORD=someNotSecurePassword
     ports:
       - 5432:5432
+
