@@ -79,7 +79,7 @@ jobs:
             API_PORT: 3000
             API_HOST: localhost
             API_PROTOCOL: http
-            DATABASE_URL: "postgres://testusr@localhost:5432/bdtest"
+            DATABASE_URL: "postgres://postgres@localhost:5432/bdtest"
 workflows:
   version: 2
   install_n_build_n_test_n_postgre:
