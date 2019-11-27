@@ -69,12 +69,12 @@ jobs:
       - run:
           name: command_apt
           command: sudo apt install -y postgresql-client || true
+      # - run:
+      #     name: "commande de test pour la var d'env "
+      #     command: echo $POSTGRES_USER
       - run:
-          name: "commande de test pour la var d'env "
-          command: echo $POSTGRES_USER
-      - run:
-          name: cmd_test_postgre_and_several_echo
-          command: echo $DATABASE_URL && echo $POSTGRES_DB && echo $POSTGRES_USER && yarn test:e2e
+          name: cmd_test_postgre
+          command: yarn test:e2e
           environment:
             POSTGRES_USER: postgres
             POSTGRES_DB: bdtest
