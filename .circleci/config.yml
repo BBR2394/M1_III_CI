@@ -92,8 +92,8 @@ jobs:
     steps:
       - checkout
       - run:
-         name: "do nothing just echo toto"
-         command: echo toto
+          name: "do nothing just echo toto"
+          command: echo toto
 workflows:
   version: 2
   install_n_build_n_test_n_postgre:
