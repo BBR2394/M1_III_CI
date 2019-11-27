@@ -74,7 +74,7 @@ jobs:
           command: echo $POSTGRES_USER
       - run:
           name: cmd_test_postgre_and_several_echo
-          command: echo $DATABASE_URL && $POSTGRES_DB && $POSTGRES_USER echo yarn test:e2e
+          command: echo $DATABASE_URL && echo $POSTGRES_DB && echo $POSTGRES_USER && yarn test:e2e
           environment:
             POSTGRES_USER: postgres
             POSTGRES_DB: bdtest
