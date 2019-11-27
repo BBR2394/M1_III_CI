@@ -111,7 +111,9 @@ jobs:
       - run:
           name: "yarn help"
           command: yarn help
-
+      - run:
+          name: "yarn install"
+          command: yarn install
       - run:
           name: "yarn build the documentation"
           command: yarn build:doc
