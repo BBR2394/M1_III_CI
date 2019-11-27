@@ -83,9 +83,9 @@ jobs:
   set_docker:
     docker:
       - image: bertral/cours_dev_ops_miii:app
-      auth:
-        username: bertral  # can specify string literal values
-        password: $DOCKERHUB_PASSWORD  # or project environment variable reference {{ .Environment.DOCKERHUBPASSWD }}
+        auth:
+          username: bertral  # can specify string literal values
+          password: $DOCKERHUB_PASSWORD  # or project environment variable reference {{ .Environment.DOCKERHUBPASSWD }}
 workflows:
   version: 2
   install_n_build_n_test_n_postgre:
