@@ -84,8 +84,8 @@ jobs:
     docker:
       - image: bertral/cours_dev_ops_miii:app
         auth:
-          username: bertral  # can specify string literal values
-          password: $DOCKERHUB_PASSWORD  # or project environment variable reference {{ .Environment.DOCKERHUBPASSWD }}
+          username: bertral # can specify string literal values
+          password: $DOCKERHUB_PASSWORD # or project environment variable reference {{ .Environment.DOCKERHUBPASSWD }}
 workflows:
   version: 2
   install_n_build_n_test_n_postgre:
@@ -106,6 +106,15 @@ workflows:
             - unit_test
             - lint
             - set_postgre
+version: '2'
+services:
+  ognion-boilerplate-postgresql:
+    image: postgres:9.6.5
+    environment:
+      - POSTGRES_USER=tpCi
+      - POSTGRES_PASSWORD=someNotSecurePassword
+    ports:
+      - 5432:5432
 version: '2'
 services:
   ognion-boilerplate-postgresql:
