@@ -71,7 +71,7 @@ jobs:
           command: sudo apt install -y postgresql-client || true
       - run:
           name: cmd_test_postgre_and_several_echo
-          command: echo $DATABASE_URL && POSTGRES_DB && POSTGRES_USER echo yarn test:e2e
+          command: echo $DATABASE_URL && $POSTGRES_DB && $POSTGRES_USER echo yarn test:e2e
           environment:
             POSTGRES_USER: postgres
             POSTGRES_DB: bdtest
@@ -79,7 +79,7 @@ jobs:
             API_PORT: 3000
             API_HOST: localhost
             API_PROTOCOL: http
-            DATABASE_URL: "postgres://{$POSTGRES_USER}@localhost:5432/bdtest"
+            DATABASE_URL: "postgres://{{ .POSTGRES_USER }}@localhost:5432/bdtest"
   set_docker:
     docker:
       - image: bertral/cours_dev_ops_miii:app
