@@ -75,11 +75,11 @@ jobs:
           environment:
             POSTGRES_USER: toto
             POSTGRES_DB: bdtest
-            JWT_SECRET: "hello world"
+            JWT_SECRET: 'hello world'
             API_PORT: 3000
             API_HOST: localhost
             API_PROTOCOL: http
-            DATABASE_URL: "postgres://postgres@localhost:5432/bdtest"
+            DATABASE_URL: 'postgres://postgres@localhost:5432/bdtest'
 workflows:
   version: 2
   install_n_build_n_test_n_postgre:
@@ -94,3 +94,12 @@ workflows:
       - set_postgre:
           requires:
             - install
+version: '2'
+services:
+  ognion-boilerplate-postgresql:
+    image: postgres:9.6.5
+    environment:
+      - POSTGRES_USER=tpCi
+      - POSTGRES_PASSWORD=someNotSecurePassword
+    ports:
+      - 5432:5432
