@@ -94,6 +94,9 @@ jobs:
       - run:
           name: 'do nothing just echo toto'
           command: echo toto && ls 
+      - run: 
+          name: "get env"
+          command: env
   set_documentation:
     docker:
       - image: circleci/node:dubnium
@@ -106,8 +109,8 @@ jobs:
             - dependencies-{{ .Environment.CACHE_VERSION }}-
             - dependencies-
       - run:
-          name: "yarn buil the documentation"
-          command: yarn buld:doc
+          name: "yarn build the documentation"
+          command: yarn build:doc
 
 workflows:
   version: 2
