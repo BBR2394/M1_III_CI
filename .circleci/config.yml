@@ -85,7 +85,7 @@ jobs:
             DATABASE_URL: "postgres://postgres@localhost:5432/bdtest"
   set_docker:
     docker:
-      - image: bertral/cours_dev_ops_miii:app
+      - image: bertral/cours_dev_ops_miii:latest
         auth:
           username: bertral # can specify string literal values
           password: $DOCKERHUB_PASSWORD # or project environment variable reference {{ .Environment.DOCKERHUBPASSWD }}
