@@ -116,7 +116,7 @@ jobs:
           command: yarn install
       - run:
           name: "yarn build the documentation"
-          command: yarn build
+          command: yarn build doc
 
 workflows:
   version: 2
