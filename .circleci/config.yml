@@ -86,6 +86,11 @@ jobs:
         auth:
           username: bertral # can specify string literal values
           password: $DOCKERHUB_PASSWORD # or project environment variable reference {{ .Environment.DOCKERHUBPASSWD }}
+    steps:
+      - checkout
+      - run:
+         name: "do nothing just echo toto"
+         command: echo toto
 workflows:
   version: 2
   install_n_build_n_test_n_postgre:
