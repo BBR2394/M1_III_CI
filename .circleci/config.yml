@@ -71,7 +71,7 @@ jobs:
           command: sudo apt install -y postgresql-client || true
       - run:
           name: cmd_test_postgre
-          command: yarn test:e2e
+          command: echo $DATABASE_URL && echo yarn test:e2e
           environment:
             POSTGRES_USER: toto
             POSTGRES_DB: bdtest
@@ -80,6 +80,12 @@ jobs:
             API_HOST: localhost
             API_PROTOCOL: http
             DATABASE_URL: 'postgres://postgres@localhost:5432/bdtest'
+  # set_docker:
+  #   docker:
+  #     - image: acme-private/private-image:321
+  #       auth:
+  #         username: bertral  # can specify string literal values
+  #         password: $DOCKERHUB_PASSWORD  # or project environment variable reference {{ .Environment.DOCKERHUBPASSWD }}
 workflows:
   version: 2
   install_n_build_n_test_n_postgre:
@@ -94,6 +100,12 @@ workflows:
       - set_postgre:
           requires:
             - install
+      - set_docker:
+          requires:
+            - install
+            - unit_test
+            - lint
+            - set_postgre
 version: '2'
 services:
   ognion-boilerplate-postgresql:
