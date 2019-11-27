@@ -109,6 +109,10 @@ jobs:
             - dependencies-{{ .Environment.CACHE_VERSION }}-
             - dependencies-
       - run:
+          name: "yarn help"
+          command: yarn help
+
+      - run:
           name: "yarn build the documentation"
           command: yarn build:doc
 
